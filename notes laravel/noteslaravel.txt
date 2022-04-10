@@ -1,0 +1,803 @@
+laravel : it is most trending php framework in the market
+
+Other frameworks
+*****************
+1. laravel
+2. codeIgnitor
+3. yii
+4. cakephp
+5. fuelphp
+6. phalcon
+7. zend
+8. symphony
+9. slimPHP
+10. zwave
+...
+...
+...
+...
+ 
+
+why laravel
+***********
+1. very very easy
+2. Highly upgradable,packages
+3. highly scalable
+4. open source : you need not to spend single paisa at all.
+5. highly secure
+6. largest community in the world, github.com, laracast.com, stackoverflow
+
+who is founder of laravel:-
+taylor otwell
+
+one cannot complete laravel in one to 7 Birth.
+Illuminate\Package
+
+
+Example in order to mail laravel will use phpmailer package.
+laravel ---> phpmailer overview
+phpmailer ----> github repository ---> readme.md file
+carbon ----> Date and time manage ---> readme.md file
+
+Understand why we require framework?
+************************************
+1. Consider I want to chicken Biryani, now you have two options
+	1. goto some tundey kababi and pay amount and eat done
+	2. Market ---> Egg ---> Chick --->  In Big Chicken -->
+	-----> cut into pieces --> cook ---> eat.
+framework : it is collection of packages, classes, methods and 
+inbuilt functionalities.
+
+How to install laravel
+**********************
+1. make sure you have composer installed.
+	open cmd ---> type ---> composer -v 2.x
+	the composer is installed or else not installed.
+
+goto getcomposer.org
+     download composer (.exe)
+     
+what is composer:-
+
+1. composer is a dependency manager tool.
+2. composer can be used to install any new package and upgrade to any new package.
+3. All the pacakages are donwloaded from packagist.org server.
+4. composer is a type package manager tool.
+
+composer is same as pip in python
+composer is same as npm in node
+composer is same as apt in linux
+
+How to install laravel
+**********************
+1. using laravel/installer
+	composer global require laravel/installer (first-time)
+	laravel new <project-name>  (any-time)
+
+2. using composer create-project command
+	composer create-project --prefer-dist laravel/laravel <project-name> (any-time)
+
+How to run laravel application
+*****************************
+goto inside project-folder
+1. artisan file : anonymous file
+   .env file : anoynous file
+
+php artisan serve
+	    [commmand Argument]
+artisan : command line argument tool for laravel
+
+laravel like other framework follow strict design pattern.
+All the 23-desing pattern are implemented in laravel
+that is why strong knowledge of oops is required.
+
+laravel like other framework uses MVC Concept.
+M:model 
+******
+	All the database related part, and database Query logic
+	like database connection, database Query, Querybuilder(Eloquent
+	) 
+	every thing comes under,model.
+	type of class (core file)
+V:views
+*******
+	Views Refers the Templates or HTML views, like form,
+	about us, contacts us, etc etc.
+	Views are responsible to handling the, presentation part 
+	of web-app or you can views are resposible for 
+	front end
+	All the files related to front end are related to views.
+	Every views file in laravel is called blade(any-name.blade.php) file.
+	it is type hybrid file
+
+C:controller : 
+**************
+
+	it is also a type of class (core file)
+	controller is middle man, or intermediate component
+	B/w views and model
+
+	How it works:-
+	************
+	Any Request coming from views it will send controller and
+	controller with then send to, model to update the db.
+	
+     Similary any changes in db will seen by model and send the controller to render in thview.
+
+Postmortem of laravel
+*********************
+Directory Structure of laravel
+1. Projectfolder :<root-folder>
+		It is complete Package of Laravel Collections.
+		The name of project is actually a clone of project download by composer 
+		from packagist.org with packagename laravel/laravel
+		The name of folder depends what name has been given when installed during, installation.
+		via composer.
+		
+		This the main folder.
+		Everything you will find inside this only.
+
+Folder structure inside laravel Project folder
+***********************************************
+	1. app folder:	
+			this is main folder where entire application bussiness logic is put
+			like, all middleware(security), all service provider                        (RouteServiceProvider,SchemaServiceProvider), all controller, all models,
+			all Exception, packages path(kernel.php), all console command are found 
+			here, the beauty of this folder each file in folder is core file and uses 
+			strict concept of oops and the file made inside these folders will be class files
+			only full of serveral namespaces.
+
+			The Request from public/index.php will be send to composer.json from where
+			psr-4 path we acquired, as app and will be send to bootstrap/app.php to bootstrap
+			the application which is,registered inside kernel.php and kernel.php will return
+			the package path Illuminate/framework/src path which will used by
+			vendor/autoload.php to handle any type of operation distributed according to the 
+			package.
+			
+			1. console : This is the folder that, contains all the files related to user
+				defined console commands,which is generated by user by using
+				php artisan make:command <command-name>
+
+			    	1. kernel.php file
+				2. commands Folder : it will contain all the important class file
+					for the user-defined class now this user defined class
+					can have a logic which may require, laravel inbuilt package,
+					for any database operation like Eloquent for this you will 
+					need package path to vendor/Eloquent so for sapi name = 'cli-server'
+					who will provide, package path here kernel.php will provide
+					the path to vendor/autoload.php for, cli-server
+
+					user-defined-class command files
+					...
+					...
+					...
+
+				3. Exception : This folder contains any type of, Exceptions which 
+						need to be handle at application level globally.
+						Handler.php : This is perticular file where
+						we register, every type of Exception need to be handled.
+						we can use try catch blocks if not each logic 
+						is already b/w try and catch block which is managed
+						by laravel internally.
+
+				what is meaning of csrf token?
+				csrf : cross site request forgery.
+				
+				4. http :- This folder contains all the controller
+					middlewares, Kernel.php
+					 
+					 middleware : It contains all the middleware
+					 related to security which will be automatically,
+					 Running at Request and Response before sending
+					 to controller.
+					 
+					 Example predefined, middleware
+					 1. VerifyCsrfToken
+					 2. TrustProxies
+					 3. EncryptCookies
+					 4. TrustHosts
+					 5. TrimString
+					 6. RedirectIfAuthenticated
+					 ...
+					 ...
+					 ...
+										[ Filter ]
+					 Request -------> | Middleware | ------> Response
+					 Request <--------| Middleware | <-----Response
+										[ Filter ]
+					 
+					 You can make your own custom middleware using
+					 command 
+					 php artisan make:middleware <middleware-name>
+					 
+					 Controller : All the controller will reside, 
+					 inside controllers Folder only.
+					 
+					 
+				5. Models :- Models are responsible for managing
+				Query logical and database related information,
+				And Joins/Relationships.
+				
+				All Models, placed are, Integral Part of MVC.
+				
+				What is Eloquent? : Query Builder name is Eloquent.
+				it is type of package and found inside, vendor.
+				
+				What is Doctrine?
+				It is name of ORM, Package
+				
+				Do you remeber :-
+				1. mysqli_fetch_objects()
+				
+				user   ----------> Class
+					id ----------> Attribute :instance Variable.
+					name ---------> Attribute : intance variable.
+					class --------> Attribute : instance variable.
+					
+				What is ORM? 
+					Object Relationships Mapping(RDBMS) 
+					It is relational, Database.
+					All the Table Schema, Database Schema will mapped
+					with class and Object.
+					
+					
+					How to Convert Student Schema in ORM?
+					Class Student{
+					
+					private $name;
+					private $class;
+					private $email;
+					private $id;
+					private $marks;
+					
+					public function add(){
+						// Insert Logic
+					
+					}
+					
+					public function update(){
+						
+						//Update Logic
+					
+					}
+					
+					public function delete(){
+						//Delete Logic
+					}
+					
+					}
+					
+					**************
+					Why to use ORM?
+					***************
+					
+					It has inbuilt Schema design, which enable 
+					easy setup of joins without writing the Complex
+					Queries these are called as relationships.
+					
+					We will perform postmortem on relationship.
+					
+					************************
+					Types of relationships
+					************************
+					1. one-to-many.
+					2. many-to-many.
+					3. inverse.
+					4. one to one.
+					5. polymorphic.
+					
+					
+					6. Providers:-
+						These contains All Class for service providers.
+						These Service Provides will be used to run 
+						any services, in bootstrapping.
+						
+						Eg: All the Authentication service
+						will be managed by, AuthServiceProvider
+						
+						SchemaServiceProvider : All the Database
+						Related Schema Services will be Applied
+						Here
+						
+						RouteServiceProvider : All the custom Routes,
+						And Routes will be registered here.
+						
+				
+				What is use of kernel.php in middleware?
+				1. When we create any middleware, we need to register
+					the Custom Middleware Path to Kernel.php
+					then only it will Run.
+				
+					
+				bootstrap : It is most Important Folder with file name app.php
+				located inside this,it will bootstrap(bootload) the Entire Application, So that EveryR equest can enter, app folder
+				
+				It is Core Part of Laravel Framework.
+				
+					Cache : generally cache is used, to optimise the Performance
+					You might knowing, cache Management
+					
+					
+					In Memory
+					Process 1 ---------[Cache Memory]----------> Memory (Original Source)
+					
+					Ram Execution <----------------[Cache if not found]----> Original Memory
+					
+					Images : Link
+					
+					First Time Images Laod time 
+					Next Time Internet Off Images Load
+					Browser will cache them
+					
+					Inside bootstrap folder we have cache folder
+					There may n no of classes or packages running parallely
+					Model A and Model B.
+					
+					Server ---> Traffic --->
+					1 ---> Model A 
+					2 ---> Model B
+					3 ---> Model A 
+					4 ---> Model A
+							Model A Copy ----> Cache Memory
+							Request is directly Proportional to caching
+							
+					There is one problem with cache?
+						1. 
+						
+						Model A Cache 
+						Model A Some new Data added or some new path Added.
+						then we require to clear cache.
+						
+						php artisan cache:clear
+						
+						
+				2. Config Folder : This Folder will contain, Important configuration
+					or settings, it is, same as settings.php but all the different types 
+					of settings has been classified inform of of different files
+					like 
+					All the settings and configuration are used from config folder
+					which are not configured at .env
+					There may a chance that, few settings may be common for .env and config folder
+					important config files
+					app.php  : Application Configurations.
+					auth.php : Authentication Configurations.
+					broadcasting.php : Broadcasting Configurations.
+					cache.php : Cache Configurations
+					cors.php : cross origin resource sharing policy settings.
+					database.php : All the database Configurations
+					filesystems.php : All the Uploaded files will be stored here.
+					hashing.php : All the hashing Algorithm, will be stored here. 
+					logging.php : All the cache, logs error logs will be confgured.
+					mail.php : if you want to send and use smtp mail settings the we go for,
+							   we use mail.php.
+					queue.php : it will contains settings to run multiple process related to aws, 
+								beanstack, redis etc.
+					sanctum.php : NA
+					services.php : All the settings Related to service providers.
+					session.php : All the settings related to, session drivers etc,
+					view.php : All the settings related to, views.
+					
+					database : 
+						1. factories : Design Pattern ---> Factory Design Pattern, 
+									   here we create the Different Objects in Bulk.
+						2. migrations : Here we create table schema, and as soon we 
+										enter the command php artisan migrate
+										Table schema is created,
+						3. seeders : it refers to seeds (Records) which can be generated inside 
+									  database in just one second
+									  You can upload lakh lakh of data using seeders
+									  
+									  For Eg:-
+									  Ecommerce : we can use faker module to generate fake data.
+									  
+									  
+					public : it is folder where all the request are forwarded, it acts as a entry 
+					point to, Application such that entire request goes inside public/index.php
+					file.
+					
+					1. htaccess : Apache Handler file with important, configuration
+								  with different setting,security, environment , rewrite Rules
+								  Required to run laravel Application.
+					2. robot.txt : it is special file used for SEO, and Blogging google crawlers
+						or search Engine will scan for robot.txt file only.
+					3. index.php : It is main file which acts as a, entry point to the application.
+					4. favicon : it laravel favicon icon.
+					
+					
+					Why name public ?
+					it refers to public_html in the web-hosting (web-server)
+					
+					It provides, security due to which use can move / forward in the url 
+					but not backward suppose if index.php was not inside, public folder
+					and this file would have been placed parallely to app,bootsrap,config,resources,
+					database,... so if index.php file is deleted, then all the folder structure 
+					would be visible and this could lead to security threat and hacking of the
+					application so inorder to protect this we use .htaccess with forbidden error
+					Options -Indexes : permission denied
+					Options +Indexes : Access 
+					
+					Suppose we dont have, index.php about.php home.php xyz.php 404.php
+					
+					DirectoryIndex index.php about.php home.php xyz.php 404.php
+									[0]      [1]       [2]      [3]      [4]
+												
+					Resources : This folder is respsonsible for assests(
+					images,js,css,icons,favicons,audio,vedio,langauges,views,html pages,blade files...)
+						
+					This folder contains, pre-compiled files of js,css, and other files.
+					SASS : simple Auwesome Style sheet,(Programmable css, loops, keywords
+					varaibles...)
+					
+					when you run single command all the css,js, and Other files will
+					generated a single app.js or single app.css so and will 
+					be generated inside public/css or public/images or public/icons,
+					public/fonts....
+					
+						1. css  : pre-compiled css
+						2. js  :  pre-compiled js
+						3. lang : All the langauges, folder
+						4. views : welcome.blade.php : 
+									php artisan serve landing from this path only.
+									
+									
+									
+					
+					What will you make multi-lingual site ?
+					
+					1. in order to make a application which support multiple
+					langauge what you have to do, is inside resource folder,
+					we have lang folder inside lang / en /
+					we have multiple files for validation, paginations, rules...
+					what will happen if we want to change the, langauge content
+					from en to hindi or en to french or en to german
+					
+					lang
+					  |-
+						|-en
+							validation.php 
+								return [
+								
+								'alpha' => 'The :attribute must contain only letter'
+								
+								];
+						|-hindi
+							validation.php 
+								return [
+								
+								'alpha' => 'Is :attribute mey letter hona chaiye'
+								
+								];
+						|-german
+						|-french
+					
+					
+					Routes:-
+					This folder contains all the url mapped with the resources.
+					using http methods
+					
+					Route::get('/users',function(){
+						return view('users');
+					});
+				
+					Route::get() : Direct 
+					Route::post() : with csrf token
+					Route::put() : with csrf token + _method = PUT.
+					Route::patch() : with csrf token + _method = PATCH.
+					Route::Delete() : with csrf token + _method = DELETE.
+							
+					1. web.php : All url related to wep-app.
+					2. api.php : All the Api will be used by api.php.
+					3. channel.php : All the BroadCasting Routes (Network, webshockets,)
+					4. console.php : we can make our own command using php artisan
+									 if we want to make our own routes or urls for console, in console.php.
+									 
+					Lets a Build Few Routes, using web.php inside Routes
+
+					Laravel Directory Structure for Routes is different in version
+					less than <=5.8
+					
+					app
+					 |---> Routes.
+					 
+					>=5.8.+ x.version.
+					
+					app
+					Routes.
+					
+					
+					
+How to create Api in laravel
+****************************
+1. using Controller,and models
+2. using resources : Route::resource('AnyResource');
+	How to see list of routes
+	**************************
+	php artisan route:list
+	
+						 
+How to work with Query Builder:-
+
+1. $user = User::all() : select * from users;
+2. $user = User::find(id);
+3. $user = User::find()->where()->get()
+
+4. 	$user = new User();
+	$user->name = 'some name';
+	$user->email = 'some@gmail.com';
+	$user->pass = '1234';
+	$user->save();
+
+5. $user = User::find($id);
+   $user->name = 'new-name';
+   $user->email='new@email.com';
+   $user->pass = 'new@password';
+   $user->save();
+   
+6. $user = User::find($id);
+   $user->delete();
+   
+  
+Lets us create a Model
+************************
+php artisan make:model <model-name>
+php artisan make:model Student
+
+Once Model is Ready? 
+We need a Migration:-
+php artisan make:migration create_table_for_students
+
+We need to Set Up Database Connections:-
+goto .env and add the values like
+hostname,
+username,
+password,
+dbname
+
+Once database connection is ready we need to run first migrations.
+Why we need to run migrations:-
+1. because laravel maintain, few intial tables like, migrations,users,passwords,session,
+   failed_password tables.
+   
+   php artisan migrate --pretend : to show the Query of migrations
+   php artisan migrate:status : to see current migration status.
+   php artisan migrate : all the migrations and table schema will executed.
+   
+   Note :: migrations hold the table schema, and models hold the data.
+   
+   
+  step 1: php artisan make:migration create_table_student
+		goto database/migration/create_table_student.php 
+		
+		public function up(){
+		
+			Schema::create('student', function (Blueprint $table) {
+            
+            $table->id();
+            $table->string('name',191);
+            $table->string('email',191)->unique();
+            $table->string('mobile',20)->nullable();
+            
+        });
+		
+		}
+  
+  
+		public function down() //migrate:rollback
+		{
+			Schema::dropIfExists('student');
+		}
+					
+				
+		php artisan migrate
+		Migrations done succesfully.
+		Now create some dummy record in table student.
+		
+		
+		How to create model
+		********************
+		php artisan make:model <Student>
+		Model created successfully.
+		
+		goto folder app/models/Student.php
+		
+		We have to create Resource 
+		**************************
+		php artisan make:resource <Student>
+		Resource created successfully.
+		
+		A Resource is like controller, which all ready methods.
+		goto app/controller/Student
+		
+		php artisan make:controller StudentController --resource
+		app/http/controller/StudentController.php
+		
+		index : show the data.
+		create : create the form.
+		store : insert the data.
+		show : single record with some-id.
+		edit : form for edit record.
+		update : update the data.
+		destroy : delete the record. 
+		
+		For Api :-
+		1. get,put,delete,post
+		   
+		   get : index all  
+		   get : show single 
+		   post : store
+		   put : update
+		   delete :destroy
+		   
+		   
+		We have to create Route for Resource:-
+		 use App\http\Controller\StudentController; //namespaces
+		 
+		1. Route::resource('/student','StudentController');
+		php artisan route:list -c 
+		
+		// Route::resource('/students','\App\Http\Controllers\StudentController');
+		//or
+		Route::resource('/students',StudentController::class);
+		
+		
+		Note : get_student_data : snake case
+		     : getStudentData :camel 
+			 : GetStudentData : parscal 
+			 : get-student-data : kebab case
+			 
+		if you are using model to table schema:-
+		singular ---> plural 
+		Model -----> Models 
+		student -----> Students
+		StudentResult ---> student_results
+		
+		custom naming convetion : model ---> protected $table='<any-name-any-case>';
+		
+		
+		
+		
+		
+					
+					
+					
+					
+					
+					
+
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+									  
+									  
+									  
+									  
+									  
+									  
+									  
+									  
+									  
+									  
+						
+						
+						
+						
+						
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				
+				
+					
+					
+				
+				
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
